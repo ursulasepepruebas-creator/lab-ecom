@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ficha producto</title>
+</head>
+<body>
+
+<h1>Ficha de producto</h1>
+<div id="detalle"></div>
+
+<script>
+fetch('data/products.json')
+  .then(response => response.json())
+  .then(data => {
+
+    const params = new URLSearchParams(window.location.search);
+    const sku = params.get('sku');
+
+    const producto = data.products.find(p => p.sku === sku);
+
+    const detalle = document.getElementById('detalle');
+
+    if(producto){
+      detalle.innerHTML =
+        "<h2>" + producto.name + "</h2>" +
+        "<img src='" + producto.image + "' width='300'>" +
+        "<p>" + producto.description + "</p>" +
+        "<strong>Precio: " + producto.price + " €</strong><br><br>" +
+        "<button onclick='addToCart(\"" + producto.sku + "\")'>Añadir al carrito</button>";
+    } else {
+      detalle.innerHTML = "Producto no encontrado";
+    }
+  });
+
+function addToCart(sku){
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const existing = cart.find(item => item.sku === sku);
+
+  if(existing){
+    existing.qty += 1;
+  } else {
+    cart.push({sku: sku, qty: 1});
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  alert("Producto añadido al carrito");
+}
+</script>
+
+</body>
+</html>
 
