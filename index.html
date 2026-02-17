@@ -9,6 +9,27 @@
   <h1>Bienvenida a mi tienda laboratorio</h1>
   <p>Estoy construyendo mi e-commerce desde cero.</p>
 <div id="productos"></div>
+<script>
+  fetch('data/products.json')
+    .then(response => response.json())
+    .then(data => {
+      const contenedor = document.getElementById('productos');
+
+      data.products.forEach(producto => {
+        const tarjeta = document.createElement('div');
+
+        tarjeta.innerHTML = `
+          <h2>${producto.name}</h2>
+          <img src="${producto.image}" width="150">
+          <p>${producto.description}</p>
+          <strong>Precio: ${producto.price} €</strong>
+          <hr>
+        `;
+
+        contenedor.appendChild(tarjeta);
+      });
+    });
+</script>
 
 </body>
 </html>
