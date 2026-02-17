@@ -1,0 +1,14 @@
+{
+ "_IMPORTANT_NOTE": "EDITA SOLO LOS PRODUCTOS",
+  "products": [
+    {
+      "sku": "DEMO-001",
+      "name": "Producto demo 1",
+      "category": "Demo",
+      "price": 29,
+      "image": "https://via.placeholder.com/300",
+      "description": "Descripción demo",
+      "stock": 12
+    }
+  ]
+}
